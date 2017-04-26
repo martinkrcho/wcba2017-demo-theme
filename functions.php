@@ -55,3 +55,4 @@ require_once( 'library/responsive-images.php' );
 // require_once( 'library/class-foundationpress-protocol-relative-theme-assets.php' );
 
 require_once( 'library/custom-post-types.php' );
+require_once( 'library/custom-taxonomies.php' );
