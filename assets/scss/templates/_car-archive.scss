@@ -1,0 +1,54 @@
+.post-type-archive-car {
+
+	.blogpost-entry {
+		margin-bottom: 1rem;
+	}
+
+	.inner {
+		height: 100%;	
+	}
+
+	.card {
+		/* Add shadows to create the "card" effect */
+		box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+		transition: 0.3s;
+	}
+
+	/* On mouse-over, add a deeper shadow */
+	.card:hover {
+		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	}
+
+	header {
+
+		h2 {
+			font-size: 1.5rem;
+			padding: 0.5rem 1rem;
+		}
+
+		a.featured {
+			height: 200px;
+			width: 100%;
+			display: block;
+			box-sizing: border-box;
+			background-size: cover;
+			background-position: center;
+		}
+
+	}
+
+	.meta-label {
+		font-weight: bold;
+		padding-right: 10px;
+
+		.fa {
+			margin-right: 5px;
+		}
+	}
+
+	footer {
+		padding: 0.5rem 1rem 2rem 1rem;
+	}
+
+}
+
