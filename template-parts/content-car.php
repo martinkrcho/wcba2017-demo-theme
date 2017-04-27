@@ -18,18 +18,7 @@
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 		</header>
 		<footer>
-			<?php $manufacturer = get_the_terms(get_the_ID(), 'manufacturer'); ?>
-			<?php if (!empty($manufacturer)): ?>
-				<p class="manufacturer">
-					<span class="meta-label"><i class="fa fa-address-card"></i><?php _e('Manufacturer', 'foundationpress'); ?>:</span><?php echo $manufacturer[0]->name; ?>
-				</p>
-			<?php endif; ?>
-			<?php $year = get_the_terms(get_the_ID(), 'year'); ?>
-			<?php if (!empty($year)): ?>
-				<p class="year">
-					<span class="meta-label"><i class="fa fa-calendar-o"></i><?php _e('Year', 'foundationpress'); ?>:</span><?php echo $year[0]->name; ?>
-				</p>
-			<?php endif; ?>
+			<?php get_template_part('template-parts/fragment', 'car-specs'); ?>
 		</footer>
 	</div>
 </div>

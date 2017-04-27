@@ -37,17 +37,21 @@
 
 	}
 
-	.meta-label {
-		font-weight: bold;
-		padding-right: 10px;
 
-		.fa {
-			margin-right: 5px;
-		}
-	}
 
 	footer {
 		padding: 0.5rem 1rem 2rem 1rem;
+	}
+
+}
+
+.car-specs {
+
+	.meta-label {
+
+		.fa {
+			margin-right: 0.75rem;
+		}
 	}
 
 }
