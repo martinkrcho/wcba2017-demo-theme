@@ -11,6 +11,7 @@ var colors      = require('colors');
 var dateFormat  = require('dateformat');
 var del         = require('del');
 var cleanCSS    = require('gulp-clean-css');
+var rename		= require('gulp-rename');
 
 // Enter URL of your local server here
 // Example: 'http://localwebsite.dev'
@@ -153,6 +154,14 @@ gulp.task('javascript', function() {
       title: "Uglify JS Error"
     }));
 
+  gulp.src('assets/javascript/car-filter.js')
+	.pipe(uglify)
+	.pipe(rename({
+		suffix: '.min'
+	}))
+	.pipe(gulp.dest('assets/javascript'))
+    .pipe(browserSync.stream());
+	
   return gulp.src(PATHS.javascript)
     .pipe($.sourcemaps.init())
     .pipe($.babel())
@@ -171,7 +180,12 @@ gulp.task('copy', function() {
   var fontAwesome = gulp.src('assets/components/fontawesome/fonts/**/*.*')
       .pipe(gulp.dest('assets/fonts'));
 
-  return merge(fontAwesome);
+  var handlebars = gulp.src([
+	  'assets/components/handlebars/handlebars.js',
+	  'assets/components/handlebars/handlebars.min.js'
+	]).pipe(gulp.dest('assets/javascript'));
+	
+  return merge(fontAwesome, handlebars);
 });
 
 // Package task
@@ -254,7 +268,10 @@ gulp.task('default', ['build', 'browser-sync'], function() {
     });
 
   // JS Watch
-  gulp.watch(['assets/javascript/custom/**/*.js'], ['clean:javascript', 'javascript', 'lint'])
+  gulp.watch([
+	  'assets/javascript/custom/**/*.js',
+	  'assets/javascript/car-filter.js'
+	], ['clean:javascript', 'javascript', 'lint'])
     .on('change', function(event) {
       logFileChange(event);
     });

@@ -6,6 +6,8 @@ assets/stylesheets/
 assets/components/
 assets/javascript/vendor/
 assets/javascript/foundation.js
+assets/javascript/handlebars*.js
+assets/javascript/*min.js
 assets/javascript/custom/demosite.js
 packaged/
 wpcs/

@@ -9,7 +9,7 @@ class FoundationPress_RestAPI {
 	public static function initializeEndpoints() {
 
 		register_rest_route('foundationpress/v1', '/cars/', array(
-			'methods' => 'GET',
+			'methods' => 'POST',
 			'callback' => array(__CLASS__, 'handleGetCarsRequest')
 		));
 	}
@@ -64,9 +64,9 @@ class FoundationPress_RestAPI {
 		}
 		$result = array(
 			'cars' => $cars,
-			'data' => $parameters,
+			//'data' => $parameters,
 			'total_pages' => ($query === NULL) ? 0 : $query->max_num_pages,
-			'query' => $queryArgs
+			//'query' => $queryArgs
 		);
 
 		wp_reset_postdata();
@@ -91,15 +91,22 @@ class FoundationPress_RestAPI {
 
 		//	ordering
 		$orderby = array_key_exists('orderby', $parameters) ? $parameters['orderby'] : 'date';
-		$allowedOrderOptions = array('age', 'title', 'mileage', 'rand');
+		$allowedOrderOptions = array('date', 'age', 'title', 'mileage', 'rand');
 		if (in_array($orderby, $allowedOrderOptions)) {
 
-			$queryArgs['orderby'] = $orderby;
+			if (in_array($orderby, array('title', 'rand', 'date'))) {
+				$queryArgs['orderby'] = $orderby;
+			} else {
+
+				$queryArgs['meta_key'] = $orderby;
+				$queryArgs['orderby'] = 'meta_value';
+			}
+
 			$queryArgs['order'] = ($orderby == 'title') ? 'ASC' : 'DESC';
 		}
 
 		//	year taxonomy filter
-		if (array_key_exists('year', $parameters) && !in_array('all', $parameters[SorConfigObjects::TAXONOMY_TYPE_FIELD])) {
+		if (array_key_exists('year', $parameters) && 'all' != $parameters['year']) {
 
 			array_push($taxQuery, array(
 				'taxonomy' => 'year',
@@ -109,7 +116,7 @@ class FoundationPress_RestAPI {
 		}
 
 		//	manufacturer taxonomy filter
-		if (array_key_exists('manufacturer', $parameters) && !in_array('all', $parameters['manufacturer'])) {
+		if (array_key_exists('manufacturer', $parameters) && 'all' !== $parameters['manufacturer']) {
 
 			array_push($taxQuery, array(
 				'taxonomy' => 'manufacturer',

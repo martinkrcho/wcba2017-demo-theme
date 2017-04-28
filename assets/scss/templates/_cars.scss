@@ -19,6 +19,32 @@
 		box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 	}
 
+	.ordering {
+
+		button {
+			$height: ($input-font-size + ($form-spacing * 1.5) - rem-calc(1));
+
+			height: $height;
+			margin: 0 0 $form-spacing;
+			padding: ($form-spacing / 2);
+
+			appearance: none;
+			border: $input-border;
+			border-radius: $select-radius;
+			background-color: $select-background;
+			cursor: pointer;
+
+			&:hover {
+				background-color: darken($select-background, 10%);
+			}
+
+			&:focus, &.active {
+				background-color: $primary-color;
+				color: $white;
+			}
+		}
+	}
+
 	header {
 
 		h2 {

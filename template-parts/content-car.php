@@ -1,6 +1,6 @@
 <?php
 /**
- * The default template for displaying content
+ * Template for displaying custom post type content
  *
  * Used for both single and index/archive/search.
  *
@@ -17,8 +17,5 @@
 			<?php endif; ?>
 			<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
 		</header>
-		<footer>
-			<?php get_template_part('template-parts/fragment', 'car-specs'); ?>
-		</footer>
 	</div>
 </div>

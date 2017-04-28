@@ -29,6 +29,18 @@ if ( ! function_exists( 'foundationpress_scripts' ) ) :
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+	
+	if (is_post_type_archive('car')) {
+		
+		$suffix = '';( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min';
+		wp_enqueue_script( 'handlebars', get_template_directory_uri() . '/assets/javascript/handlebars'.$suffix.'.js', array(), '4.0.5', true );
+		wp_enqueue_script( 'fp-car-filter', get_template_directory_uri() . '/assets/javascript/car-filter'.$suffix.'.js', array('jquery', 'handlebars'), '1.0.0', true );
+		wp_localize_script('fp-car-filter', 'fp_car_catalogue', array(
+			'rest_api_root' => esc_url_raw(rest_url()),
+			'rest_api_nonce' => wp_create_nonce('wp_rest')
+		));
+		
+	}
 
 	}
 
